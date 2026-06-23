@@ -6,9 +6,6 @@
 [ext_resource type="Shader" uid="uid://cejp2n3xty3n3" path="res://shaders/items/camera/camera_item.gdshader" id="3_xrn0c"]
 [ext_resource type="Texture2D" uid="uid://c245sp7mmadb0" path="res://assets/items/camera/camera_battery_empty.png" id="4_n1rje"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n1rje"]
-points = PackedVector3Array(0, 0, 0, -7.5, -5.775, -15, 7.5, 5.775, -15, -7.5, 5.775, -15, 7.5, -5.775, -15)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vd6iq"]
 shader = ExtResource("3_xrn0c")
 shader_parameter/channel_offset = 0.003
@@ -22,6 +19,9 @@ viewport_path = NodePath("MainCamera")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_v8t7c"]
 viewport_path = NodePath("ShaderCamera")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n1rje"]
+points = PackedVector3Array(0, 0, 0, -7.5, -5.775, -15, 7.5, 5.775, -15, -7.5, 5.775, -15, 7.5, -5.775, -15)
 
 [node name="Camera" type="Node3D" unique_id=109823311]
 script = ExtResource("1_o7axi")
@@ -48,11 +48,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("4_n1rje")
 
-[node name="Area3D" type="Area3D" parent="MainCamera/ItemCamera" unique_id=260245514]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MainCamera/ItemCamera/Area3D" unique_id=1649184704]
-shape = SubResource("ConvexPolygonShape3D_n1rje")
-
 [node name="ShaderCamera" type="SubViewport" parent="." unique_id=1411370472]
 size = Vector2i(320, 240)
 
@@ -70,5 +65,16 @@ texture = SubResource("ViewportTexture_v8t7c")
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=801677885]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16, 0.25, -0.35)
 remote_path = NodePath("../MainCamera/ItemCamera")
+
+[node name="Area3D" type="Area3D" parent="RemoteTransform3D" unique_id=260245514]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RemoteTransform3D/Area3D" unique_id=1649184704]
+shape = SubResource("ConvexPolygonShape3D_n1rje")
+
+[node name="Flash" type="SpotLight3D" parent="." unique_id=1561515638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.4, -0.1324903)
+light_energy = 0.0
+spot_range = 25.1
+spot_angle = 51.616524
 
 [editable path="blockbench_export"]
