@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://d2ttn3h60kd07"]
+
+[ext_resource type="PackedScene" uid="uid://bbq4vj3q4pmvx" path="res://scenes/entity/player/player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://5weijsk2lwfb" path="res://scenes/objects/graves/grave_1.tscn" id="2_0xm2m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_top_color = Color(0.071565084, 0.14081776, 0.19592762, 1)
+sky_horizon_color = Color(0.27876908, 0.2894922, 0.29585445, 1)
+ground_bottom_color = Color(0.15838766, 0.13202736, 0.10236665, 1)
+ground_horizon_color = Color(0.27876908, 0.2894922, 0.29585445, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D" unique_id=1699480249]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1674764224]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1282203258]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 31, -23)
+light_color = Color(0.45748308, 0.45748308, 0.45748308, 1)
+shadow_enabled = true
+
+[node name="Player" parent="." unique_id=717190419 instance=ExtResource("1_ig7tw")]
+
+[node name="level" type="CSGCombiner3D" parent="." unique_id=1806413397]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="level" unique_id=1580126238]
+transform = Transform3D(8.12, 0, 0, 0, 2.1, 0, 0, 0, 8.14, 0, -1.0550001, 0)
+use_collision = true
+size = Vector3(4, 0.1, 4)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="level" unique_id=1899034419]
+transform = Transform3D(0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 0, 0, 1, -20.76314, 0.14999998, 0)
+size = Vector3(12, 1, 3)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="level" unique_id=1571313437]
+transform = Transform3D(8.12, 0, 0, 0, 2.1, 0, 0, 0, 8.14, -42.67189, 2.0963438, 0)
+use_collision = true
+size = Vector3(4, 0.1, 4)
+
+[node name="Grave1" parent="." unique_id=153210055 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(0.6500848, 0, -0.75986165, 0, 1, 0, 0.75986165, 0, 0.6500848, -13, -0.14456743, 5.682777)
+points = 10.0
+
+[node name="Grave2" parent="." unique_id=127046835 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-0.5657157, 0, -0.82460034, 0, 1, 0, 0.82460034, 0, -0.5657157, -13, -0.14456743, -6.317223)
+points = 10.0

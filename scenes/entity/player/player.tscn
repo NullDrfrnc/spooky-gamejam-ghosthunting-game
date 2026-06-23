@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://bbq4vj3q4pmvx"]
+
+[ext_resource type="Script" uid="uid://wa10h1b2ilkq" path="res://scripts/entity/player/player.gd" id="1_xg5q3"]
+[ext_resource type="Script" uid="uid://bb1fdfg42sqwi" path="res://scripts/entity/player/player_movement.gd" id="2_ypewr"]
+[ext_resource type="Script" uid="uid://cq60uteocfyuq" path="res://scripts/entity/player/player_inventory.gd" id="3_eefhw"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ypewr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xg5q3"]
+
+[node name="Player" type="CharacterBody3D" unique_id=671259911]
+script = ExtResource("1_xg5q3")
+metadata/_custom_type_script = "uid://wa10h1b2ilkq"
+
+[node name="PlayerMovement" type="Node3D" parent="." unique_id=927497138]
+script = ExtResource("2_ypewr")
+metadata/_custom_type_script = "uid://bb1fdfg42sqwi"
+
+[node name="PlayerInventory" type="Node3D" parent="." unique_id=1821643888]
+script = ExtResource("3_eefhw")
+metadata/_custom_type_script = "uid://cq60uteocfyuq"
+
+[node name="PlayerCamera" type="Camera3D" parent="." unique_id=806891452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+current = true
+fov = 60.0
+
+[node name="Hand" type="Node3D" parent="PlayerCamera" unique_id=1389861872]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.5, -1.0000001)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PlayerCamera" unique_id=1076427448]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerCamera/CanvasLayer" unique_id=1932712679]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Slot1" type="TextureRect" parent="PlayerCamera/CanvasLayer/HBoxContainer" unique_id=1245898677]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot2" type="TextureRect" parent="PlayerCamera/CanvasLayer/HBoxContainer" unique_id=1915846710]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot3" type="TextureRect" parent="PlayerCamera/CanvasLayer/HBoxContainer" unique_id=647323833]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2021672172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_ypewr")
+
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=2088152554]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_xg5q3")

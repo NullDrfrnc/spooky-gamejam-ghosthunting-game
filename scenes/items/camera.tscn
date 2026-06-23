@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://b78hjh8211k6i"]
+
+[ext_resource type="Script" uid="uid://5jqidn6kqjw" path="res://scripts/items/camera.gd" id="1_o7axi"]
+[ext_resource type="PackedScene" uid="uid://0kebwvm7qyhs" path="res://assets/items/camera/Camera.gltf" id="2_v8t7c"]
+[ext_resource type="Texture2D" uid="uid://bmamfmgu6221h" path="res://assets/items/camera/camera_item.png" id="2_vd6iq"]
+[ext_resource type="Shader" uid="uid://cejp2n3xty3n3" path="res://shaders/items/camera/camera_item.gdshader" id="3_xrn0c"]
+[ext_resource type="Texture2D" uid="uid://c245sp7mmadb0" path="res://assets/items/camera/camera_battery_empty.png" id="4_n1rje"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n1rje"]
+points = PackedVector3Array(0, 0, 0, -7.5, -5.775, -15, 7.5, 5.775, -15, -7.5, 5.775, -15, 7.5, -5.775, -15)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vd6iq"]
+shader = ExtResource("3_xrn0c")
+shader_parameter/channel_offset = 0.003
+shader_parameter/r_levels = 8
+shader_parameter/g_levels = 8
+shader_parameter/b_levels = 8
+shader_parameter/dither_strength = 1.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_n1rje"]
+viewport_path = NodePath("MainCamera")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_v8t7c"]
+viewport_path = NodePath("ShaderCamera")
+
+[node name="Camera" type="Node3D" unique_id=109823311]
+script = ExtResource("1_o7axi")
+texture = ExtResource("2_vd6iq")
+metadata/_custom_type_script = "uid://5jqidn6kqjw"
+
+[node name="blockbench_export" parent="." unique_id=1213435339 instance=ExtResource("2_v8t7c")]
+
+[node name="MainCamera" type="SubViewport" parent="." unique_id=39844346]
+size = Vector2i(320, 240)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="ItemCamera" type="Camera3D" parent="MainCamera" unique_id=1127670888]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16, 0.25, -0.35)
+fov = 40.0
+size = 0.05
+
+[node name="CameraUI" type="CanvasLayer" parent="MainCamera/ItemCamera" unique_id=1242017713]
+
+[node name="BatteryIndicator" type="TextureRect" parent="MainCamera/ItemCamera/CameraUI" unique_id=1277000276]
+custom_minimum_size = Vector2(32, 32)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_n1rje")
+
+[node name="Area3D" type="Area3D" parent="MainCamera/ItemCamera" unique_id=260245514]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainCamera/ItemCamera/Area3D" unique_id=1649184704]
+shape = SubResource("ConvexPolygonShape3D_n1rje")
+
+[node name="ShaderCamera" type="SubViewport" parent="." unique_id=1411370472]
+size = Vector2i(320, 240)
+
+[node name="TextureRect" type="TextureRect" parent="ShaderCamera" unique_id=726400224]
+material = SubResource("ShaderMaterial_vd6iq")
+anchors_preset = -1
+offset_right = 320.0
+offset_bottom = 240.0
+texture = SubResource("ViewportTexture_n1rje")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=595949546]
+transform = Transform3D(0.19675809, 0, 0, 0, 0.18358777, 0, 0, 0, 1, -0.15669842, 0.249152, 0.12546432)
+texture = SubResource("ViewportTexture_v8t7c")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=801677885]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16, 0.25, -0.35)
+remote_path = NodePath("../MainCamera/ItemCamera")
+
+[editable path="blockbench_export"]

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://5weijsk2lwfb"]
+
+[ext_resource type="PackedScene" uid="uid://b1gogid7h7eyb" path="res://assets/objects/graves/grave_1/grave_1.gltf" id="1_aaygr"]
+[ext_resource type="Script" uid="uid://bgw7duvsyedcj" path="res://scripts/objects/photographable_object.gd" id="1_vpnce"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vpnce"]
+size = Vector3(1.1, 1.3000001, 0.3)
+
+[node name="Grave1" type="StaticBody3D" unique_id=1671796087]
+script = ExtResource("1_vpnce")
+metadata/_custom_type_script = "uid://bgw7duvsyedcj"
+
+[node name="blockbench_export" parent="." unique_id=1610564342 instance=ExtResource("1_aaygr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=783202111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65000004, 0)
+shape = SubResource("BoxShape3D_vpnce")
